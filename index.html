@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mushroom Coffee | SEO Strategy 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a08;
+    --bg2: #111110;
+    --bg3: #1a1a17;
+    --surface: #1e1e1a;
+    --surface2: #252520;
+    --border: #2e2e28;
+    --border2: #3a3a32;
+    --accent: #c8f04a;
+    --accent2: #a8d438;
+    --accent3: #7fb800;
+    --gold: #e8c84a;
+    --muted: #6b6b5e;
+    --text: #e8e8e0;
+    --text2: #a8a89a;
+    --text3: #6b6b5e;
+    --red: #ff5540;
+    --teal: #4af0c8;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── LOADER ─── */
+  #loader {
+    position: fixed; inset: 0;
+    background: var(--bg);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+  #loader.hidden { opacity: 0; visibility: hidden; }
+  .loader-icon { font-size: 3rem; animation: spin 2s linear infinite; margin-bottom: 1.5rem; }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  .loader-text {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .loader-bar {
+    width: 200px; height: 2px;
+    background: var(--border);
+    margin-top: 1rem;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .loader-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    animation: loadfill 2s ease forwards;
+  }
+  @keyframes loadfill { to { width: 100%; } }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(10,10,8,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.78rem;
+    color: var(--text2);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(200,240,74,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    border: 1px solid rgba(200,240,74,0.3);
+    padding: 0.35rem 1rem;
+    border-radius: 2rem;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 2.2s ease forwards;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 12vw, 10rem);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 2.4s ease forwards;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+    display: block;
+  }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--text2);
+    max-width: 600px;
+    margin: 1.5rem auto 2.5rem;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.8s 2.6s ease forwards;
+  }
+  .hero-stats {
+    display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center;
+    margin-top: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 2.8s ease forwards;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+  }
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    opacity: 0; animation: fadeUp 0.8s 3.2s ease forwards;
+  }
+  .scroll-hint span {
+    font-family: var(--font-mono);
+    font-size: 0.6rem; color: var(--text3);
+    letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollpulse 1.5s ease infinite;
+  }
+  @keyframes scrollpulse { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:0.4;transform:scaleY(0.7)} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 6rem 2rem; position: relative; }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 0.95;
+    margin-bottom: 1rem;
+  }
+  .section-title em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .section-desc {
+    font-size: 1rem;
+    color: var(--text2);
+    max-width: 520px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* ─── PHASE HEADER ─── */
+  .phase-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text3);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--border2);
+    border-radius: 2rem;
+  }
+
+  /* ─── CARDS GRID ─── */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1px; margin-top: 3rem; border: 1px solid var(--border); }
+  .card {
+    background: var(--bg2);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .card:hover { background: var(--surface); }
+  .card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .card:hover::before { opacity: 1; }
+  .card-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .card-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text); }
+  .card-body { font-size: 0.85rem; color: var(--text2); line-height: 1.7; }
+
+  /* ─── KEYWORD TIER ─── */
+  .keyword-section { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .tier-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 2rem; margin-top: 3rem; }
+  .tier-block { }
+  .tier-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    display: inline-block;
+  }
+  .tier-1 .tier-label { background: rgba(200,240,74,0.15); color: var(--accent); border: 1px solid rgba(200,240,74,0.3); }
+  .tier-2 .tier-label { background: rgba(74,240,200,0.1); color: var(--teal); border: 1px solid rgba(74,240,200,0.3); }
+  .tier-3 .tier-label { background: rgba(232,200,74,0.1); color: var(--gold); border: 1px solid rgba(232,200,74,0.3); }
+  .tier-4 .tier-label { background: rgba(255,85,64,0.1); color: var(--red); border: 1px solid rgba(255,85,64,0.3); }
+  .tier-title { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .keyword-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .keyword-pill {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text2);
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    padding: 0.3rem 0.7rem;
+    border-radius: 0.25rem;
+    cursor: default;
+    transition: all 0.2s;
+  }
+  .keyword-pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(200,240,74,0.06); }
+
+  /* ─── CONTENT STRATEGY ─── */
+  .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; border: 1px solid var(--border); margin-top: 3rem; }
+  .content-card {
+    background: var(--bg2);
+    padding: 2.5rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .content-card:hover { background: var(--surface); }
+  .content-number {
+    font-family: var(--font-display);
+    font-size: 5rem;
+    color: var(--border2);
+    line-height: 1;
+    position: absolute;
+    top: 1rem; right: 1.5rem;
+    transition: color 0.3s;
+  }
+  .content-card:hover .content-number { color: var(--border); }
+  .content-type {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .content-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.75rem; }
+  .content-body { font-size: 0.85rem; color: var(--text2); line-height: 1.7; }
+  .content-examples { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .content-example {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text3);
+    padding: 0.35rem 0.75rem;
+    background: var(--bg);
+    border-left: 2px solid var(--border2);
+    border-radius: 0 0.25rem 0.25rem 0;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .content-card:hover .content-example { border-color: var(--accent3); color: var(--text2); }
+  @media(max-width:700px) { .content-grid { grid-template-columns: 1fr; } }
+
+  /* ─── LINK BUILDING ─── */
+  .link-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .link-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 1.75rem;
+    border-radius: 0.25rem;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .link-card:hover { border-color: var(--accent3); transform: translateY(-4px); }
+  .link-card-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .link-card-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .link-card-body { font-size: 0.8rem; color: var(--text2); line-height: 1.65; }
+
+  /* ─── TIMELINE ─── */
+  .timeline { margin-top: 3rem; position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute; top: 0; bottom: 0; left: 2.25rem;
+    width: 1px; background: var(--border2);
+  }
+  .timeline-item {
+    display: flex; gap: 2rem;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .timeline-item.visible { opacity: 1; transform: translateX(0); }
+  .timeline-dot {
+    width: 4.5rem; height: 4.5rem; flex-shrink: 0;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--accent);
+    position: relative; z-index: 1;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .timeline-item:hover .timeline-dot { background: rgba(200,240,74,0.1); border-color: var(--accent); }
+  .timeline-content { padding-top: 0.75rem; }
+  .timeline-months {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .timeline-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .timeline-body { font-size: 0.83rem; color: var(--text2); line-height: 1.7; }
+
+  /* ─── METRICS ─── */
+  .metrics-section { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 1px; border: 1px solid var(--border); margin-top: 3rem; }
+  .metric-card {
+    background: var(--bg);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: background 0.3s;
+  }
+  .metric-card:hover { background: var(--surface); }
+  .metric-value {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .metric-label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--text3);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+  .metric-desc {
+    font-size: 0.75rem;
+    color: var(--text3);
+    margin-top: 0.5rem;
+    font-style: italic;
+  }
+
+  /* ─── QUICK WINS ─── */
+  .wins-list { margin-top: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 1rem; }
+  .win-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.5rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 0.25rem;
+    transition: border-color 0.3s;
+  }
+  .win-item:hover { border-color: var(--accent3); }
+  .win-num {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--accent);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 2.5rem;
+  }
+  .win-text { }
+  .win-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .win-body { font-size: 0.8rem; color: var(--text2); line-height: 1.65; }
+
+  /* ─── CTA ─── */
+  .cta-section {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 8rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(200,240,74,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.95;
+    margin-bottom: 1.5rem;
+  }
+  .cta-section h2 em { font-style: normal; color: var(--accent); }
+  .cta-section p { color: var(--text2); max-width: 480px; margin: 0 auto 2.5rem; font-weight: 300; }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 1rem 2.5rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .cta-btn:hover { background: var(--accent2); transform: translateY(-2px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 2rem 2.5rem;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  footer p { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text3); letter-spacing: 0.1em; }
+
+  /* ─── SECTION ALT BG ─── */
+  .section-alt { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+  /* ─── FADE IN ON SCROLL ─── */
+  .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── SEPARATOR ─── */
+  .sep { border: none; height: 1px; background: var(--border); }
+
+  /* ─── AI GEO BLOCK ─── */
+  .geo-list { margin-top: 3rem; display: flex; flex-direction: column; gap: 1rem; }
+  .geo-item {
+    display: flex; align-items: flex-start; gap: 1.5rem;
+    padding: 1.5rem 2rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 0.25rem;
+    transition: border-color 0.3s;
+  }
+  .geo-item:hover { border-color: var(--teal); }
+  .geo-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .geo-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .geo-body { font-size: 0.85rem; color: var(--text2); line-height: 1.7; }
+
+  /* ─── COMPETITOR TABLE ─── */
+  .comp-table { width: 100%; margin-top: 3rem; border-collapse: collapse; }
+  .comp-table th, .comp-table td { padding: 1rem 1.25rem; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+  .comp-table th { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); background: var(--surface); }
+  .comp-table td { color: var(--text2); background: var(--bg2); }
+  .comp-table tr:hover td { background: var(--surface); }
+  .tag-strong { font-size: 0.68rem; font-family: var(--font-mono); padding: 0.2rem 0.5rem; border-radius: 0.2rem; background: rgba(200,240,74,0.12); color: var(--accent); border: 1px solid rgba(200,240,74,0.2); }
+  .tag-weak { font-size: 0.68rem; font-family: var(--font-mono); padding: 0.2rem 0.5rem; border-radius: 0.2rem; background: rgba(255,85,64,0.1); color: var(--red); border: 1px solid rgba(255,85,64,0.2); }
+  .tag-mid { font-size: 0.68rem; font-family: var(--font-mono); padding: 0.2rem 0.5rem; border-radius: 0.2rem; background: rgba(232,200,74,0.1); color: var(--gold); border: 1px solid rgba(232,200,74,0.2); }
+
+  @media(max-width:768px) {
+    .nav-links { display: none; }
+    .hero h1 { font-size: 4.5rem; }
+    .hero-stats { gap: 1.5rem; }
+    .timeline::before { left: 2rem; }
+    .comp-table { display: block; overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-icon">🍄</div>
+  <div class="loader-text">Building SEO Strategy...</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">🍄 Mushroom Coffee</div>
+  <ul class="nav-links">
+    <li><a href="#technical">Technical</a></li>
+    <li><a href="#keywords">Keywords</a></li>
+    <li><a href="#content">Content</a></li>
+    <li><a href="#links">Links</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#metrics">Metrics</a></li>
+  </ul>
+  <div class="nav-tag">SEO POA · 2026</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-label">SEO Plan of Action · 2026</div>
+  <h1>DOMINATE<em>ORGANIC SEARCH</em></h1>
+  <p class="hero-sub">A growth-focused SEO playbook built by studying the brands winning in this space — Ryze, Four Sigmatic, MUD\WTR — and finding every gap they've left open.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">$2.7B</div>
+      <div class="hero-stat-label">Market Size</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">6</div>
+      <div class="hero-stat-label">SEO Phases</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">4.6M</div>
+      <div class="hero-stat-label">Ryze Monthly Visits</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">Top 3</div>
+      <div class="hero-stat-label">Target Position</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll to explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- COMPETITOR LANDSCAPE -->
+<section class="section-alt">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-eyebrow">Competitor Intelligence</div>
+      <h2 class="section-title">Know Your <em>Opponents</em></h2>
+      <p class="section-desc">Before building the strategy, understand where the gaps are. All three competitors have blind spots you can exploit.</p>
+    </div>
+    <div class="fade-in">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Brand</th>
+            <th>Monthly Traffic</th>
+            <th>SEO Strength</th>
+            <th>Content Gap</th>
+            <th>Your Opportunity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Ryze</strong></td>
+            <td>4.6M visits</td>
+            <td><span class="tag-strong">Dominant</span></td>
+            <td>Paid-heavy, thin blog content</td>
+            <td>Steal organic share with in-depth content</td>
+          </tr>
+          <tr>
+            <td><strong>Four Sigmatic</strong></td>
+            <td>~800K est.</td>
+            <td><span class="tag-mid">Moderate</span></td>
+            <td>Weak comparison pages</td>
+            <td>Own the "[Brand] vs Four Sigmatic" SERPs</td>
+          </tr>
+          <tr>
+            <td><strong>MUD\WTR</strong></td>
+            <td>~1.2M est.</td>
+            <td><span class="tag-mid">Moderate</span></td>
+            <td>US-only content targeting</td>
+            <td>International + long-tail keyword gaps</td>
+          </tr>
+          <tr>
+            <td><strong>All Three</strong></td>
+            <td>—</td>
+            <td><span class="tag-weak">Weak</span></td>
+            <td>Low E-E-A-T on ingredient science</td>
+            <td>Build topical authority via research content</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 1: TECHNICAL -->
+<section id="technical">
+  <div class="container">
+    <div class="fade-in">
+      <div class="phase-tag">Phase 1 · Month 1–2</div>
+      <div class="section-eyebrow">Technical SEO Foundation</div>
+      <h2 class="section-title">Build The <em>Foundation</em></h2>
+      <p class="section-desc">You can't rank a broken house. Since the site is still in staging, this is the best time to get every technical detail right before launch.</p>
+    </div>
+    <div class="cards-grid fade-in">
+      <div class="card">
+        <div class="card-icon">🏗️</div>
+        <div class="card-title">URL Architecture</div>
+        <div class="card-body">Flat, descriptive URL hierarchy. <code style="font-size:0.78rem;color:var(--accent);background:var(--bg3);padding:0.1rem 0.4rem;border-radius:0.2rem;">/mushroom-coffee/</code>, <code style="font-size:0.78rem;color:var(--accent);background:var(--bg3);padding:0.1rem 0.4rem;border-radius:0.2rem;">/vs/ryze/</code>, <code style="font-size:0.78rem;color:var(--accent);background:var(--bg3);padding:0.1rem 0.4rem;border-radius:0.2rem;">/benefits/lions-mane/</code> — structured for both crawlers and humans.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">Core Web Vitals</div>
+        <div class="card-body">LCP under 2.5s, CLS near zero, FID under 100ms. Compress all images to WebP, lazy load below-fold assets, eliminate render-blocking resources before launch.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏷️</div>
+        <div class="card-title">Schema Markup</div>
+        <div class="card-body">Product, Review, FAQ, and Article schemas from day one. Rich snippets appear in Google immediately and dramatically lift CTR vs plain blue links.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📱</div>
+        <div class="card-title">Mobile-First Design</div>
+        <div class="card-body">Google indexes mobile first. Every page, every CTA, every font size must be tested on mobile before launch. No pinch-to-zoom permitted.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🗺️</div>
+        <div class="card-title">Sitemap & Robots.txt</div>
+        <div class="card-body">XML sitemap created before indexing. Robots.txt properly configured. Submit to Google Search Console on launch day — not after traffic drops.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <div class="card-title">Tracking Stack</div>
+        <div class="card-body">GA4 + Google Search Console + Hotjar/MS Clarity installed pre-launch. You need baseline data from day one to measure everything that follows.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔁</div>
+        <div class="card-title">Canonical Tags</div>
+        <div class="card-body">All product variant pages (flavour, size, subscription vs one-time) need canonical tags pointing to the master URL. Prevent duplicate content from hurting rankings.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔒</div>
+        <div class="card-title">HTTPS + Security</div>
+        <div class="card-body">SSL certificate active, HSTS headers set, mixed content errors resolved. Google treats HTTPS as a ranking signal and browsers actively warn users on HTTP pages.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 2: KEYWORDS -->
+<section id="keywords" class="keyword-section">
+  <div class="container">
+    <div class="fade-in">
+      <div class="phase-tag">Phase 2 · Month 1–2</div>
+      <div class="section-eyebrow">Keyword Strategy</div>
+      <h2 class="section-title">Four-Tier <em>Keyword Map</em></h2>
+      <p class="section-desc">Every keyword your client should own, organised by intent and difficulty. Start with Tier 1 & 2, build toward Tier 3 & 4 authority.</p>
+    </div>
+    <div class="tier-grid fade-in">
+      <div class="tier-block tier-1">
+        <div class="tier-label">Tier 1 · High Intent</div>
+        <div class="tier-title">Transactional</div>
+        <p style="font-size:0.82rem;color:var(--text2);margin-bottom:1rem;line-height:1.6;">Highest buying intent. Users ready to purchase. These are your conversion keywords — they drive revenue directly.</p>
+        <div class="keyword-pills">
+          <span class="keyword-pill">best mushroom coffee</span>
+          <span class="keyword-pill">mushroom coffee buy online</span>
+          <span class="keyword-pill">organic mushroom coffee</span>
+          <span class="keyword-pill">lion's mane coffee blend</span>
+          <span class="keyword-pill">adaptogenic coffee</span>
+          <span class="keyword-pill">coffee with reishi</span>
+          <span class="keyword-pill">mushroom coffee subscription</span>
+          <span class="keyword-pill">mushroom coffee free shipping</span>
+        </div>
+      </div>
+      <div class="tier-block tier-2">
+        <div class="tier-label">Tier 2 · Steal Traffic</div>
+        <div class="tier-title">Comparison</div>
+        <p style="font-size:0.82rem;color:var(--text2);margin-bottom:1rem;line-height:1.6;">The biggest untapped gap. Third-party sites rank for these — your brand can own them and convert comparison shoppers directly.</p>
+        <div class="keyword-pills">
+          <span class="keyword-pill">[Brand] vs Ryze</span>
+          <span class="keyword-pill">[Brand] vs Four Sigmatic</span>
+          <span class="keyword-pill">[Brand] vs MUD\WTR</span>
+          <span class="keyword-pill">Ryze vs Four Sigmatic vs MUDWTR</span>
+          <span class="keyword-pill">best mushroom coffee alternative Ryze</span>
+          <span class="keyword-pill">MUDWTR alternatives</span>
+          <span class="keyword-pill">Four Sigmatic alternatives</span>
+          <span class="keyword-pill">mushroom coffee comparison 2026</span>
+        </div>
+      </div>
+      <div class="tier-block tier-3">
+        <div class="tier-label">Tier 3 · Authority</div>
+        <div class="tier-title">Informational</div>
+        <p style="font-size:0.82rem;color:var(--text2);margin-bottom:1rem;line-height:1.6;">Builds topical authority and earns backlinks. Captures top-of-funnel traffic from users researching before buying.</p>
+        <div class="keyword-pills">
+          <span class="keyword-pill">does mushroom coffee actually work</span>
+          <span class="keyword-pill">lion's mane benefits for brain</span>
+          <span class="keyword-pill">reishi mushroom for sleep</span>
+          <span class="keyword-pill">cordyceps for energy and focus</span>
+          <span class="keyword-pill">is mushroom coffee safe</span>
+          <span class="keyword-pill">mushroom coffee side effects</span>
+          <span class="keyword-pill">how much caffeine in mushroom coffee</span>
+          <span class="keyword-pill">adaptogenic coffee vs regular coffee</span>
+        </div>
+      </div>
+      <div class="tier-block tier-4">
+        <div class="tier-label">Tier 4 · Quick Wins</div>
+        <div class="tier-title">Long-Tail</div>
+        <p style="font-size:0.82rem;color:var(--text2);margin-bottom:1rem;line-height:1.6;">Low competition, high conversion intent. Rank faster, convert higher. These are your early-stage traffic builders.</p>
+        <div class="keyword-pills">
+          <span class="keyword-pill">mushroom coffee for anxiety no jitters</span>
+          <span class="keyword-pill">best mushroom coffee for focus WFH</span>
+          <span class="keyword-pill">mushroom coffee for women</span>
+          <span class="keyword-pill">keto mushroom coffee blend</span>
+          <span class="keyword-pill">mushroom coffee for gut health</span>
+          <span class="keyword-pill">mushroom coffee morning routine</span>
+          <span class="keyword-pill">low caffeine coffee with adaptogens</span>
+          <span class="keyword-pill">coffee without jitters UK</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 3: CONTENT -->
+<section id="content">
+  <div class="container">
+    <div class="fade-in">
+      <div class="phase-tag">Phase 3 · Month 2–5</div>
+      <div class="section-eyebrow">Content Strategy & Topic Clusters</div>
+      <h2 class="section-title">Content That <em>Converts</em></h2>
+      <p class="section-desc">Three pillar pages. Four content formats. Built around intent. Every article feeds traffic into your product pages through a tight internal linking structure.</p>
+    </div>
+    <div class="content-grid fade-in">
+      <div class="content-card">
+        <div class="content-number">01</div>
+        <div class="content-type">Pillar Page</div>
+        <div class="content-title">The Complete Guide to Mushroom Coffee</div>
+        <div class="content-body">Your topical authority anchor. Covers everything — what mushroom coffee is, how it works, the science, the benefits, and how to choose. Supported by 8–12 cluster articles.</div>
+        <div class="content-examples">
+          <div class="content-example">What is lion's mane mushroom?</div>
+          <div class="content-example">How cordyceps improves energy</div>
+          <div class="content-example">Reishi for stress and sleep</div>
+          <div class="content-example">Chaga for immune support</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="content-number">02</div>
+        <div class="content-type">Pillar Page</div>
+        <div class="content-title">Mushroom Coffee Benefits Hub</div>
+        <div class="content-body">Targets the massive informational search volume around health benefits. Each benefit gets its own cluster article for deep keyword coverage and featured snippet capture.</div>
+        <div class="content-examples">
+          <div class="content-example">Brain benefits and cognitive function</div>
+          <div class="content-example">Gut health and digestion</div>
+          <div class="content-example">Energy without jitters</div>
+          <div class="content-example">Sleep and recovery</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="content-number">03</div>
+        <div class="content-type">Pillar Page</div>
+        <div class="content-title">Mushroom Coffee Comparisons Hub</div>
+        <div class="content-body">Your traffic-stealing machine. Every brand comparison, every ingredient comparison, every format comparison. You become the authoritative source that comparison shoppers land on.</div>
+        <div class="content-examples">
+          <div class="content-example">[Brand] vs Ryze — full breakdown</div>
+          <div class="content-example">[Brand] vs MUD\WTR — honest review</div>
+          <div class="content-example">Instant vs ground mushroom coffee</div>
+          <div class="content-example">Price-per-serving comparison 2026</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="content-number">04</div>
+        <div class="content-type">Supporting Formats</div>
+        <div class="content-title">High-Priority Content Types</div>
+        <div class="content-body">Not all content formats perform equally. These four drive the most traffic and conversion in the mushroom coffee space — prioritise in this order.</div>
+        <div class="content-examples">
+          <div class="content-example">🏆 Comparison posts — rank fast, convert strong</div>
+          <div class="content-example">📋 "Best X for Y" listicles — intent-rich traffic</div>
+          <div class="content-example">🔬 Ingredient deep-dives — E-E-A-T + backlinks</div>
+          <div class="content-example">❓ FAQ schema content — AI Overviews & snippets</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 4: LINK BUILDING -->
+<section id="links" class="section-alt">
+  <div class="container">
+    <div class="fade-in">
+      <div class="phase-tag">Phase 4 · Month 3 onwards</div>
+      <div class="section-eyebrow">Link Building Strategy</div>
+      <h2 class="section-title">Authority <em>Acquisition</em></h2>
+      <p class="section-desc">Modern link building is strategic and relationship-driven. Forget bulk — every link should come from a source that real potential customers actually read.</p>
+    </div>
+    <div class="link-grid fade-in">
+      <div class="link-card">
+        <div class="link-card-icon">📰</div>
+        <div class="link-card-title">Health & Wellness Editorial</div>
+        <div class="link-card-body">Mindbodygreen, Healthline, Verywell Fit, Well+Good. These carry massive domain authority and are trusted by your exact target audience. Pitch ingredient science stories.</div>
+      </div>
+      <div class="link-card">
+        <div class="link-card-icon">🧬</div>
+        <div class="link-card-title">Biohacking Publications</div>
+        <div class="link-card-body">Ben Greenfield Fitness, Examine.com, Huberman Lab adjacent blogs. The biohacker audience is your highest-LTV customer — meet them where they already read.</div>
+      </div>
+      <div class="link-card">
+        <div class="link-card-icon">🥗</div>
+        <div class="link-card-title">Dietitian & RD Blogs</div>
+        <div class="link-card-body">Registered Dietitian sites are gold for E-E-A-T signals. Google weights health-adjacent links from credentialed professionals more heavily in the wellness space.</div>
+      </div>
+      <div class="link-card">
+        <div class="link-card-icon">🎁</div>
+        <div class="link-card-title">Product Gifting → Reviews</div>
+        <div class="link-card-body">Send product to micro-influencer bloggers (5K–50K audience) in exchange for honest reviews with contextual backlinks. Scales affordably and generates authentic content.</div>
+      </div>
+      <div class="link-card">
+        <div class="link-card-icon">📣</div>
+        <div class="link-card-title">HARO / Connectively</div>
+        <div class="link-card-body">Respond to journalist queries about coffee, adaptogens, wellness, morning routines. One Forbes or Business Insider mention can generate 10x domain authority boost.</div>
+      </div>
+      <div class="link-card">
+        <div class="link-card-icon">📊</div>
+        <div class="link-card-title">Original Research & Data</div>
+        <div class="link-card-body">"We surveyed 500 people switching from coffee to mushroom coffee." Own data earns passive press links organically. One study can generate 20–50 backlinks if picked up correctly.</div>
+      </div>
+      <div class="link-card">
+        <div class="link-card-icon">✍️</div>
+        <div class="link-card-title">Guest Posts</div>
+        <div class="link-card-body">Wellness, nutrition, and productivity sites. Target DR40+ domains. One well-placed guest post in a relevant niche publication beats 50 low-quality directory links.</div>
+      </div>
+      <div class="link-card">
+        <div class="link-card-icon">☕</div>
+        <div class="link-card-title">Roundup Inclusion</div>
+        <div class="link-card-body">Get listed in "best mushroom coffee" roundup articles ranking on page 1. Outreach to these authors — offer product samples and updated info. This is where buying decisions happen.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 5: ON-PAGE -->
+<section id="onpage">
+  <div class="container">
+    <div class="fade-in">
+      <div class="phase-tag">Phase 5 · Month 2–3</div>
+      <div class="section-eyebrow">On-Page & Product Page SEO</div>
+      <h2 class="section-title">Optimise Where It <em>Converts</em></h2>
+      <p class="section-desc">Product pages are where traffic becomes revenue. They need full SEO treatment — not an afterthought.</p>
+    </div>
+    <div class="cards-grid fade-in">
+      <div class="card">
+        <div class="card-icon">🏷️</div>
+        <div class="card-title">Keyword-Rich Product Titles</div>
+        <div class="card-body">"Organic Mushroom Coffee Blend — Lion's Mane, Reishi & Cordyceps" tells Google and the customer exactly what this is and why it matters. No generic names.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">✍️</div>
+        <div class="card-title">Unique Product Descriptions</div>
+        <div class="card-body">Never use manufacturer copy. Every product description written from scratch, targeting specific long-tail keywords and speaking directly to each buyer persona's pain points.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">⭐</div>
+        <div class="card-title">Review Schema</div>
+        <div class="card-body">Embed real customer reviews with structured markup. Star ratings appear in Google results immediately, dramatically lifting CTR before you even rank for anything.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔬</div>
+        <div class="card-title">Ingredient Transparency</div>
+        <div class="card-body">Dedicated ingredient sections on product pages target "what's in mushroom coffee" queries AND build trust. Two birds, one section. This is a gap all three competitors underinvest in.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">❓</div>
+        <div class="card-title">FAQ Schema on Products</div>
+        <div class="card-body">Every product page needs an FAQ with schema. Capture People Also Ask placements for product-specific queries. These are prime real estate Google hands out for free.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔗</div>
+        <div class="card-title">Internal Linking Network</div>
+        <div class="card-body">Every blog post links back to relevant product and category pages. Every category links to pillar content. Build a topical cluster web that flows authority to conversion pages.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 6: AI/GEO -->
+<section class="section-alt">
+  <div class="container">
+    <div class="fade-in">
+      <div class="phase-tag">Phase 6 · Ongoing from Day 1</div>
+      <div class="section-eyebrow">AI Search & GEO Optimisation</div>
+      <h2 class="section-title">Rank in <em>AI Search</em></h2>
+      <p class="section-desc">In 2026, you're not just optimising for Google — you're optimising for AI Overviews, Perplexity, ChatGPT Search, and voice. This is where your competitors have zero strategy.</p>
+    </div>
+    <div class="geo-list fade-in">
+      <div class="geo-item">
+        <div class="geo-icon">🎯</div>
+        <div>
+          <div class="geo-title">Answer-First Structure</div>
+          <div class="geo-body">Every piece of content must deliver a clear, direct answer in the first paragraph. AI models and featured snippets both reward the same thing: answer the question immediately, then elaborate. Structure all content: question → direct answer → supporting explanation → evidence.</div>
+        </div>
+      </div>
+      <div class="geo-item">
+        <div class="geo-icon">🤖</div>
+        <div>
+          <div class="geo-title">People Also Ask Domination</div>
+          <div class="geo-body">Systematically scrape PAA boxes for every seed keyword. Create dedicated FAQ sections answering each question directly. PAA appears on nearly every SERP in this category — these are free top-3 placements waiting to be claimed.</div>
+        </div>
+      </div>
+      <div class="geo-item">
+        <div class="geo-icon">🌐</div>
+        <div>
+          <div class="geo-title">Brand Entity Building</div>
+          <div class="geo-body">Unlinked brand mentions across the web feed AI models like ChatGPT and Perplexity. Get listed everywhere: Healthline best-of lists, Forbes Health, Good Housekeeping, Wikipedia adjacent pages. AI citations = brand authority = more organic traffic.</div>
+        </div>
+      </div>
+      <div class="geo-item">
+        <div class="geo-icon">🎤</div>
+        <div>
+          <div class="geo-title">Voice Search Optimisation</div>
+          <div class="geo-body">Nearly 50% of searches in 2026 are voice or conversational. Write content in natural language. Target "how do I make mushroom coffee" not just "mushroom coffee recipe." Conversational long-tail keywords convert better AND rank in voice results.</div>
+        </div>
+      </div>
+      <div class="geo-item">
+        <div class="geo-icon">🏆</div>
+        <div>
+          <div class="geo-title">E-E-A-T Signal Stacking</div>
+          <div class="geo-body">Google's "Experience, Expertise, Authoritativeness, Trustworthiness" framework decides who ranks in health/wellness. Author bios with credentials, cited studies, transparent ingredient sourcing, and third-party certifications all stack E-E-A-T signals continuously.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-eyebrow">Execution Timeline</div>
+      <h2 class="section-title">12-Month <em>Roadmap</em></h2>
+      <p class="section-desc">SEO is a compound game. This is the sequence that builds maximum authority and traffic by month 12.</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot">1–2</div>
+        <div class="timeline-content">
+          <div class="timeline-months">Month 1–2</div>
+          <div class="timeline-title">Technical Foundation + Keyword Architecture</div>
+          <div class="timeline-body">Technical audit, Core Web Vitals optimisation, full keyword research, site architecture planned, GSC + GA4 installed, schema markup deployed. No content until the base is solid.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">2–3</div>
+        <div class="timeline-content">
+          <div class="timeline-months">Month 2–3</div>
+          <div class="timeline-title">Pillar Pages + Product Page Optimisation</div>
+          <div class="timeline-body">Three pillar pages live, all product pages optimised with schema, unique descriptions, ingredient sections, and internal links. Comparison pages for Ryze, Four Sigmatic, and MUD\WTR published.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">3–4</div>
+        <div class="timeline-content">
+          <div class="timeline-months">Month 3–4</div>
+          <div class="timeline-title">Blog Cluster Content + Internal Linking</div>
+          <div class="timeline-body">10–15 supporting blog articles published across all three pillar clusters. Internal linking network built. FAQ schema on every page. Start seeing first ranking movements by end of month 4.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">4–6</div>
+        <div class="timeline-content">
+          <div class="timeline-months">Month 4–6</div>
+          <div class="timeline-title">Link Building Begins + Social Proof</div>
+          <div class="timeline-body">HARO outreach, product gifting to bloggers, first guest posts live, roundup inclusion outreach. Target 5–10 quality referring domains per month. Accumulate and publish customer reviews with schema.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">6–9</div>
+        <div class="timeline-content">
+          <div class="timeline-months">Month 6–9</div>
+          <div class="timeline-title">Scale Content + Double Down on Winners</div>
+          <div class="timeline-body">Identify which content is ranking on page 2–3 and refresh/expand it. Scale to 5–6 articles/month. Begin original research piece. Start tracking share-of-voice vs competitors.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">9–12</div>
+        <div class="timeline-content">
+          <div class="timeline-months">Month 9–12</div>
+          <div class="timeline-title">Brand Authority Push + PR + Top-Tier Links</div>
+          <div class="timeline-body">Original data study published for press links. Pitch Healthline, Forbes Health, Good Housekeeping for inclusion. AI Overview appearances tracked. Organic revenue should be measurable and growing MoM.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS -->
+<section id="metrics" class="metrics-section">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-eyebrow">Performance Benchmarks</div>
+      <h2 class="section-title">Key <em>Metrics</em> to Track</h2>
+      <p class="section-desc">Know your numbers. If you're hitting these by month 6, you're on track. If not, something in the content or technical foundation needs fixing first.</p>
+    </div>
+    <div class="metrics-grid fade-in">
+      <div class="metric-card">
+        <div class="metric-value">Top 3</div>
+        <div class="metric-label">Target Ranking</div>
+        <div class="metric-desc">For Tier 1 keywords by month 12</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">3%+</div>
+        <div class="metric-label">Organic CTR</div>
+        <div class="metric-desc">Schema + compelling meta improves CTR</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">DR 40+</div>
+        <div class="metric-label">Domain Rating</div>
+        <div class="metric-desc">Target within 12 months of launch</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">10+</div>
+        <div class="metric-label">New RDs/Month</div>
+        <div class="metric-desc">Referring domains added per month</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">50+</div>
+        <div class="metric-label">PAA Wins</div>
+        <div class="metric-desc">People Also Ask placements captured</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">5+</div>
+        <div class="metric-label">Featured Snippets</div>
+        <div class="metric-desc">Position zero across keyword clusters</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">MoM</div>
+        <div class="metric-label">Organic Revenue Growth</div>
+        <div class="metric-desc">Tracked from month 4 onwards</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">SOV</div>
+        <div class="metric-label">Share of Voice</div>
+        <div class="metric-desc">% of niche keywords you own vs competitors</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK WINS -->
+<section>
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-eyebrow">Launch Priorities</div>
+      <h2 class="section-title">5 Quick Wins <em>From Day One</em></h2>
+      <p class="section-desc">Don't wait for the full strategy to kick in. These five actions generate measurable SEO results within the first 30 days of launch.</p>
+    </div>
+    <div class="wins-list fade-in">
+      <div class="win-item">
+        <div class="win-num">01</div>
+        <div class="win-text">
+          <div class="win-title">Publish Comparison Pages Before Launch</div>
+          <div class="win-body">Get [Brand] vs Ryze, [Brand] vs MUD\WTR, and [Brand] vs Four Sigmatic live from day one. These rank within weeks and are immediately actionable for buyers already in-market.</div>
+        </div>
+      </div>
+      <div class="win-item">
+        <div class="win-num">02</div>
+        <div class="win-text">
+          <div class="win-title">FAQ Schema on Homepage & Products</div>
+          <div class="win-body">Rich snippets show up in Google fast and dramatically improve CTR before you're even ranking properly. This is the easiest early-stage SEO win available.</div>
+        </div>
+      </div>
+      <div class="win-item">
+        <div class="win-num">03</div>
+        <div class="win-text">
+          <div class="win-title">Submit Sitemap to GSC on Launch Day</div>
+          <div class="win-body">Don't let Google find your site by accident. Submit your sitemap to Search Console the moment the site goes live. Speeds up indexing by days or weeks.</div>
+        </div>
+      </div>
+      <div class="win-item">
+        <div class="win-num">04</div>
+        <div class="win-text">
+          <div class="win-title">10+ Verified Reviews With Schema Before Indexing</div>
+          <div class="win-body">Star ratings appear immediately in search results when schema is live. Specificity matters — "2,847 reviews" outperforms "thousands of reviews" every time.</div>
+        </div>
+      </div>
+      <div class="win-item">
+        <div class="win-num">05</div>
+        <div class="win-text">
+          <div class="win-title">Google Business Profile (If Any Physical Presence)</div>
+          <div class="win-body">Even for DTC brands with a registered address, a GBP adds a local SEO signal, enables Google reviews, and adds credibility to brand search queries from day one.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <h2>READY TO<em>GROW?</em></h2>
+    <p>The brands winning in mushroom coffee aren't smarter — they're just more systematic. This is your SEO playbook. Now execute it.</p>
+    <a href="mailto:hello@yourbrand.com" class="cta-btn">
+      <span>Let's Build This Together</span>
+      <span>→</span>
+    </a>
+    <div style="margin-top:3rem;font-family:var(--font-mono);font-size:0.62rem;color:var(--text3);letter-spacing:0.15em;text-transform:uppercase;">
+      Mushroom Coffee SEO Plan of Action · 2026 · Built on insights from Ryze, Four Sigmatic & MUD\WTR
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>🍄 Mushroom Coffee SEO Strategy · 2026</p>
+  <p>Built for growth · Powered by competitor intelligence</p>
+</footer>
+
+<script>
+  // Loader
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('loader').classList.add('hidden');
+    }, 2200);
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in, .timeline-item').forEach(el => observer.observe(el));
+
+  // Stagger timeline items
+  document.querySelectorAll('.timeline-item').forEach((item, i) => {
+    item.style.transitionDelay = `${i * 0.1}s`;
+  });
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 120;
+      if (window.scrollY >= sectionTop) current = section.getAttribute('id');
+    });
+    navLinks.forEach(link => {
+      link.style.color = link.getAttribute('href') === `#${current}` ? 'var(--accent)' : '';
+    });
+  });
+
+  // Keyword pill hover interaction
+  document.querySelectorAll('.keyword-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      pill.style.background = 'rgba(200,240,74,0.15)';
+      pill.style.borderColor = 'var(--accent)';
+      pill.style.color = 'var(--accent)';
+      setTimeout(() => {
+        pill.style.background = '';
+        pill.style.borderColor = '';
+        pill.style.color = '';
+      }, 1500);
+    });
+  });
+</script>
+</body>
+</html>
